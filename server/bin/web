@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = File.expand_path('..', __dir__)
+DATABASE_URL = URI.parse(ENV['DATABASE_URL'])
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+chdir APP_ROOT do
+  # This script is a way to update your development environment automatically.
+  # Add necessary update steps to this file.
+
+  puts '== Installing dependencies =='
+  system! 'gem install bundler --conservative'
+  system('bundle check') || system!('bundle install')
+
+  puts "\n== Preparing database =="
+  system! 'rails db:exists && rails db:migrate || rails db:setup'
+
+  puts "\n== Removing tempfiles =="
+  system! 'rails tmp:clear'
+
+  puts "\n== Starting webserver =="
+  system! 'rails server -b 0.0.0.0'
+end
