@@ -19,6 +19,7 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:development@db:5432/weather_development
       RAILS_ENV: development
+      OPEN_WEATHER_MAP_APP_ID: ${OPEN_WEATHER_MAP_APP_ID}
     depends_on:
       - db
 
