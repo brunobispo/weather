@@ -1,5 +1,5 @@
 class WeathersController < ApplicationController
   def show
-    render json: WeatherRepository.fetch
+    @weather = WeatherRepository.fetch
   end
 end

@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux'
+
 import { WeatherAction, WeatherActionTypes } from '../actions'
+import { Temperature, TemperatureUnit } from '../types'
 
 interface WeatherState {
-  temperature: number | null
+  temperature: Temperature | null
+  unit: TemperatureUnit
 }
 
 const initialState: WeatherState = {
-  temperature: null
+  temperature: null,
+  unit: 'F'
 }
 
 function weather(
@@ -15,8 +19,9 @@ function weather(
 ): WeatherState {
   switch (action.type) {
     case WeatherActionTypes.RECEIVE_WEATHER:
-      if (action.type === WeatherActionTypes.RECEIVE_WEATHER)
-        return { ...state, ...action.weather! }
+      return { ...state, temperature: action.weather.temperature }
+    case WeatherActionTypes.CHANGE_UNIT:
+      return { ...state, unit: action.unit }
   }
 
   return state

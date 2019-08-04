@@ -45,7 +45,7 @@ function Temperature({ children, unit }: TemperatureProps) {
     <Container>
       <Text>
         {items.map((item, key) => (
-          <animated.div style={transitions[key]} key={item}>
+          <animated.div style={transitions[key]} key={key}>
             {items[key]}
           </animated.div>
         ))}

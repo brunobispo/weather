@@ -12,7 +12,7 @@ describe WeatherRepository do
     subject { repository.fetch }
 
     it { is_expected.to be_a Weather }
-    its(:temperature) { is_expected.to eq 232.22 }
+    its(:temperature) { is_expected.to eq Temperature.new(fahrenheit: 232.22) }
 
     context 'when nil is returned' do
       let(:response) { nil }

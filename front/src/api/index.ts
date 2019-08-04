@@ -1,5 +1,9 @@
+import { Temperature } from '../types'
+
 const API_URL = 'http://localhost:3001'
 
 export async function fetchWeather() {
-  return fetch(`${API_URL}/weather`).then(response => response.json())
+  return fetch(`${API_URL}/weather`)
+    .then(response => response.json())
+    .then(response => ({ ...response } as { temperature: Temperature }))
 }

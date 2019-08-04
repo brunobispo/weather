@@ -2,11 +2,14 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { connect } from 'react-redux'
 
+import { TemperatureUnit } from './types'
+import { requestWeather, changeUnit } from './actions'
+import { AppState } from './store'
 import Temperature from './components/Temperature'
 import City from './components/City'
 import Background from './components/Background'
-import { requestWeather } from './actions'
-import { AppState } from './store'
+import Header from './components/Header'
+import UnitSelect from './components/UnitSelect'
 
 const Container = styled.div`
   position: relative;
@@ -22,10 +25,12 @@ const Container = styled.div`
 
 export interface AppProps {
   temperature: number | null
+  unit: TemperatureUnit
   onRequestWeather: () => void
+  onChangeUnit: (unit: TemperatureUnit) => void
 }
 
-function App({ temperature, onRequestWeather }: AppProps) {
+function App({ temperature, unit, onRequestWeather, onChangeUnit }: AppProps) {
   useEffect(() => {
     onRequestWeather()
   }, [onRequestWeather])
@@ -35,20 +40,29 @@ function App({ temperature, onRequestWeather }: AppProps) {
   return (
     <>
       <Background />
+      <Header>
+        <UnitSelect selected={unit} onChange={onChangeUnit} />
+      </Header>
       <Container>
-        <Temperature unit='F'>{temperature.toFixed(0)}</Temperature>
+        <Temperature key={temperature} unit={unit}>{temperature.toFixed(0)}</Temperature>
         <City>São Paulo, SP</City>
       </Container>
     </>
   )
 }
 
-const mapStateToProps = (state: AppState) => ({
-  temperature: state.weather.temperature
+const mapStateToProps = ({ weather: { temperature, unit } }: AppState) => ({
+  temperature: temperature
+    ? unit === 'F'
+      ? temperature.fahrenheit
+      : temperature.celsius
+    : null,
+  unit
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-  onRequestWeather: () => dispatch(requestWeather())
+  onRequestWeather: () => dispatch(requestWeather()),
+  onChangeUnit: (unit: TemperatureUnit) => dispatch(changeUnit(unit))
 })
 
 export default connect(
