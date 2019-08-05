@@ -6,7 +6,7 @@ import { TemperatureUnit } from './types'
 import { requestWeather, changeUnit } from './actions'
 import { AppState } from './store'
 import Temperature from './components/Temperature'
-import City from './components/City'
+import CityInput from './components/CityInput'
 import Background from './components/Background'
 import Header from './components/Header'
 import UnitSelect from './components/UnitSelect'
@@ -30,7 +30,12 @@ export interface AppProps {
   onChangeUnit: (unit: TemperatureUnit) => void
 }
 
-function App({ temperature, unit, onRequestWeather, onChangeUnit }: AppProps) {
+function App({
+  temperature,
+  unit,
+  onRequestWeather,
+  onChangeUnit
+}: AppProps) {
   useEffect(() => {
     onRequestWeather()
   }, [onRequestWeather])
@@ -44,14 +49,18 @@ function App({ temperature, unit, onRequestWeather, onChangeUnit }: AppProps) {
         <UnitSelect selected={unit} onChange={onChangeUnit} />
       </Header>
       <Container>
-        <Temperature key={temperature} unit={unit}>{temperature.toFixed(0)}</Temperature>
-        <City>São Paulo, SP</City>
+        <Temperature key={temperature} unit={unit}>
+          {temperature.toFixed(0)}
+        </Temperature>
+        <CityInput />
       </Container>
     </>
   )
 }
 
-const mapStateToProps = ({ weather: { temperature, unit } }: AppState) => ({
+const mapStateToProps = ({
+  weather: { temperature, unit },
+}: AppState) => ({
   temperature: temperature
     ? unit === 'F'
       ? temperature.fahrenheit

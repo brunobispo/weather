@@ -1,7 +1,8 @@
 class WeatherRepository
   class << self
-    def fetch
-      map client.weather(q: 'Sao Paulo,br')
+    def fetch(city_id)
+      city = City.find(city_id)
+      map client.weather(q: "#{city.name},BR")
     end
 
     private
@@ -11,7 +12,11 @@ class WeatherRepository
     end
 
     def map(response)
-      response && Weather.new(temperature: response[:main][:temp])
+      raise NotFound unless response.present?
+
+      Weather.new(temperature: response[:main][:temp])
     end
   end
+
+  class NotFound < StandardError; end
 end
