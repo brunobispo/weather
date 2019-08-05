@@ -4,4 +4,3 @@ FactoryBot.define do
     state { Faker::Address.state_abbr }
   end
 end
-

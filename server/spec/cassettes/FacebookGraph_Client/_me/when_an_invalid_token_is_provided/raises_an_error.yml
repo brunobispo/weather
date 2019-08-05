@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=xxxxx
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Www-Authenticate:
+      - OAuth "Facebook Platform" "invalid_token" "Invalid OAuth access token."
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Pragma:
+      - no-cache
+      X-Fb-Rev:
+      - '1001020543'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      X-Fb-Trace-Id:
+      - EKGkZaUqnGO
+      X-Fb-Request-Id:
+      - AYfMasb47WLHF1nvh0vWrmb
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - qH0NyT3t81yVqA8dk4hCpqS7FHNi543FdP3Sl/4tc+YwPxy0kmr2rJ8V3AQUls3/KbT243qojiibRlFOv74sNA==
+      Date:
+      - Tue, 06 Aug 2019 00:59:26 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '125'
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"Invalid OAuth access token.","type":"OAuthException","code":190,"fbtrace_id":"AYfMasb47WLHF1nvh0vWrmb"}}'
+    http_version: 
+  recorded_at: Tue, 06 Aug 2019 00:59:26 GMT
+recorded_with: VCR 5.0.0

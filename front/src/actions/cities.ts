@@ -3,7 +3,7 @@ import { Action } from 'redux'
 import { AppState } from '../store'
 
 import { City } from '../types'
-import { fetchCities } from '../api'
+import { fetchCities } from '../services'
 import { requestWeather } from './weather'
 
 export enum CitiesActionTypes {

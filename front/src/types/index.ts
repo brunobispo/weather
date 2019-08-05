@@ -10,3 +10,7 @@ export interface City {
   name: string
   state: string
 }
+
+export interface User {
+  name: string
+}

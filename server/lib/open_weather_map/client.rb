@@ -14,6 +14,8 @@ module OpenWeatherMap
                                             units: 'imperial' })
     end
 
+    private
+
     def handle_status(result)
       raise InvalidApiKey if result.unauthorized?
       return result.with_indifferent_access if result.success?

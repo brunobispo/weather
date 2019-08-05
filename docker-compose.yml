@@ -20,6 +20,7 @@ services:
       DATABASE_URL: postgresql://postgres:development@db:5432/weather_development
       RAILS_ENV: development
       OPEN_WEATHER_MAP_APP_ID: ${OPEN_WEATHER_MAP_APP_ID}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
     depends_on:
       - db
 
@@ -32,5 +33,9 @@ services:
       - ./front:/opt/app:Z
     ports:
       - "3000:3000"
+    environment:
+      OPEN_WEATHER_MAP_APP_ID: ${OPEN_WEATHER_MAP_APP_ID}
+      REACT_APP_API_URI: ${REACT_APP_API_URI}
+      REACT_APP_FACEBOOK_ID: ${REACT_APP_FACEBOOK_ID}
     depends_on:
       - web

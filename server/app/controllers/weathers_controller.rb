@@ -6,6 +6,8 @@ class WeathersController < ApplicationController
   end
 
   def render_404
+    Rails.logger.error exception
+
     render status: :not_found,
            json: { status: 404, error: 'Weather forecast could not be found' }
   end

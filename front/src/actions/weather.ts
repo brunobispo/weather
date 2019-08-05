@@ -3,7 +3,7 @@ import { Action } from 'redux'
 import { AppState } from '../store'
 
 import { Temperature, TemperatureUnit, City } from '../types'
-import { fetchWeather } from '../api'
+import { fetchWeather } from '../services'
 
 export enum WeatherActionTypes {
   REQUEST_WEATHER = 'REQUEST_WEATHER',

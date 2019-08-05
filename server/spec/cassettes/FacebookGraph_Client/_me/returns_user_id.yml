@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=EAAeZCC9EySNMBAPiuFhF6HpaetGBbvx0ZCwyIhQ0ImMjUfrcJmzQW1zZAJfCDP0e0iQaHKaPoE4A2frgQalfGdSCJ3SO3szrwyEzudy3tWdk95RHRyhDkzNRJEtUFoCZBjoFQ9J0QexqcRMfk2cMZCK5OcnpBAbSNc6b0iAHvAiABgRovVsQyhyvynev3vOWYrmWj5ZAvr5SMlLh3RywSo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"da9410ccbab4fb69de4f7ab8a1f59aa2ebbaf1f5"'
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v4.0
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Pragma:
+      - no-cache
+      X-Fb-Rev:
+      - '1001021779'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Fb-Trace-Id:
+      - FrcL713+vGN
+      X-Fb-Request-Id:
+      - A-tRCPtjkz_5DymDywr6D0C
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - YdT4JbZENyX+I4UV2ZcCOglNekgAVQXR0jBrNYVkotCK3xKSXuDSUxdlsW9jPOcOi9j/D04ocE7ng9QTnBkQCA==
+      Date:
+      - Tue, 06 Aug 2019 00:59:26 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '45'
+    body:
+      encoding: UTF-8
+      string: '{"name":"Bruno Bispo","id":"120935532548319"}'
+    http_version: 
+  recorded_at: Tue, 06 Aug 2019 00:59:26 GMT
+recorded_with: VCR 5.0.0
