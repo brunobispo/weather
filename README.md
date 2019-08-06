@@ -2,6 +2,8 @@
 
 > A weather forecast app built with ReactJS + Redux + Rails API
 
+<img src="https://i.imgur.com/1Jz32o9.png" alt="App Preview" />
+
 ## Dependencies
 
 * Docker (~> 18.09.2)
