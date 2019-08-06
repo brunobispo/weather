@@ -24,6 +24,20 @@ services:
     depends_on:
       - db
 
+  test:
+    build: server
+    image: weather-server
+    command: test
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./server:/opt/app:Z
+    environment:
+      DATABASE_URL: postgresql://postgres:development@db:5432/weather_test
+      RAILS_ENV: test
+    depends_on:
+      - db
+
   front:
     build: front
     image: weather-front
