@@ -1,6 +1,7 @@
 <h1 align="center">Welcome to Weather App 👋</h1>
 
-> A weather forecast app built with ReactJS + Redux + Rails API
+> A weather forecast app built with ReactJS + Redux + TypeScript + Ruby on Rails
+
 
 <img src="https://i.imgur.com/1Jz32o9.png" alt="App Preview" />
 
