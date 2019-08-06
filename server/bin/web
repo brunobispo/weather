@@ -13,6 +13,8 @@ end
 chdir APP_ROOT do
   # This script is a way to update your development environment automatically.
   # Add necessary update steps to this file.
+  puts '== Waiting for required services =='
+  system! "wait-for #{DATABASE_URL.host}:#{DATABASE_URL.port}"
 
   puts '== Installing dependencies =='
   system! 'gem install bundler --conservative'
