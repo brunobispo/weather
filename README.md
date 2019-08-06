@@ -19,7 +19,7 @@ Copy `.env.sample` as `.env` and fill the gaps.
 docker-compose up web front
 ```
 
-Open `http://localhost:
+Open `http://localhost:3000`
 
 ## Run tests
 
