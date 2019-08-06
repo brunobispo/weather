@@ -47,6 +47,7 @@ const Input = styled.input`
   padding: 10px 40px;
   font-size: 1em;
   color: #fff;
+  width: 100%;
   &:focus {
     outline: none;
   }
