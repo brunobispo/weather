@@ -5,7 +5,7 @@ class WeathersController < ApplicationController
     @weather = WeatherRepository.fetch(params[:city_id])
   end
 
-  def render_404
+  def render_404(exception)
     Rails.logger.error exception
 
     render status: :not_found,

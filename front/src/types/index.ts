@@ -13,4 +13,5 @@ export interface City {
 
 export interface User {
   name: string
+  cities: City[]
 }

@@ -1,4 +1,4 @@
-import { CitiesAction, CitiesActionTypes } from '../actions'
+import { CitiesAction, CitiesActionTypes, UserAction, UserActionTypes } from '../actions'
 import { City } from '../types'
 
 interface CitiesState {
@@ -7,6 +7,8 @@ interface CitiesState {
   searchTerm: string | null
   searchCities: City[] | null
   loading: boolean
+  userCities: City[],
+  changed: boolean
 }
 
 const initialState: CitiesState = {
@@ -18,12 +20,14 @@ const initialState: CitiesState = {
   },
   searchTerm: null,
   searchCities: null,
-  loading: false
+  loading: false,
+  userCities: [],
+  changed: false,
 }
 
 export default function cities(
   state: CitiesState = initialState,
-  action: CitiesAction
+  action: CitiesAction | UserAction
 ): CitiesState {
   console.log(action)
   switch (action.type) {
@@ -60,6 +64,24 @@ export default function cities(
         searchTerm: null,
         searchCities: null
       }
+
+    case CitiesActionTypes.REQUEST_ADD_USER_CITY:
+      return {
+        ...state,
+        userCities: [action.city, ...state.userCities]
+      }
+
+    case UserActionTypes.RECEIVE_SIGN_IN:
+    case UserActionTypes.RECEIVE_CHECK_SESSION:
+      if (action.user)
+        return {
+          ...state,
+          userCities: action.user.cities
+        }
+      break
+
+    case UserActionTypes.RECEIVE_SIGN_OUT:
+      return { ...state, userCities: [] }
   }
 
   return state

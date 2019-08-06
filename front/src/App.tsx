@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { connect } from 'react-redux'
 
-import { TemperatureUnit, User } from './types'
+import { TemperatureUnit, User, City } from './types'
 import {
   requestWeather,
   changeUnit,
   requestSignIn,
   requestSignOut,
-  requestCheckSession
+  requestCheckSession,
+  selectCity
 } from './actions'
 import { AppState } from './store'
 import Temperature from './components/Temperature'
@@ -17,6 +18,7 @@ import Background from './components/Background'
 import Header from './components/Header'
 import UnitSelect from './components/UnitSelect'
 import UserButton from './components/UserButton'
+import UserCities from './components/UserCities'
 
 const Container = styled.div`
   position: relative;
@@ -34,22 +36,26 @@ export interface AppProps {
   temperature: number | null
   unit: TemperatureUnit
   user: User | null
+  userCities: City[]
   onRequestWeather: () => void
   onChangeUnit: (unit: TemperatureUnit) => void
   onRequestSignIn: () => void
   onRequestSignOut: () => void
   onCheckSession: () => void
+  onChangeCity: (city: City) => void
 }
 
 function App({
   temperature,
   unit,
   user,
+  userCities,
   onRequestWeather,
   onChangeUnit,
   onRequestSignIn,
   onRequestSignOut,
-  onCheckSession
+  onCheckSession,
+  onChangeCity
 }: AppProps) {
   useEffect(() => {
     onRequestWeather()
@@ -74,6 +80,7 @@ function App({
           {temperature.toFixed(0)}
         </Temperature>
         <CityInput />
+        <UserCities cities={userCities} onChange={onChangeCity} />
       </Container>
     </>
   )
@@ -81,7 +88,8 @@ function App({
 
 const mapStateToProps = ({
   weather: { temperature, unit },
-  user: { logged }
+  user: { logged },
+  cities: { userCities }
 }: AppState) => ({
   temperature: temperature
     ? unit === 'F'
@@ -89,7 +97,8 @@ const mapStateToProps = ({
       : temperature.celsius
     : null,
   unit,
-  user: logged
+  user: logged,
+  userCities
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
@@ -97,7 +106,8 @@ const mapDispatchToProps = (dispatch: any) => ({
   onChangeUnit: (unit: TemperatureUnit) => dispatch(changeUnit(unit)),
   onRequestSignIn: () => dispatch(requestSignIn()),
   onRequestSignOut: () => dispatch(requestSignOut()),
-  onCheckSession: () => dispatch(requestCheckSession())
+  onCheckSession: () => dispatch(requestCheckSession()),
+  onChangeCity: (city: City) => dispatch(selectCity(city))
 })
 
 export default connect(

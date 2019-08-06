@@ -7,3 +7,18 @@ export async function fetchCities(term: string) {
     .then(response => response.json())
     .then(response => ({ ...response } as { cities: City[] }))
 }
+
+export async function addUserCity(city: City) {
+  const token = localStorage.getItem('token')!
+
+  return fetch(`${API_URL}/user_cities`, {
+    method: 'POST',
+    body: JSON.stringify({ city_id: city.id }),
+    headers: {
+      Authorization: token,
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(response => response as City)
+}

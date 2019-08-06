@@ -9,7 +9,8 @@ import {
   startEditingCity,
   stopEditingCity,
   selectCity,
-  searchCities
+  searchCities,
+  addUserCity
 } from '../actions'
 
 const Container = styled.div<{ editing: boolean; width: number }>`
@@ -69,6 +70,7 @@ export interface CityInputProps {
   onStopEditingCity: () => void
   onSelectCity: (city: City) => void
   onSearchCities: (term: string) => void
+  onAddUserCity: (city: City) => void
 }
 
 function CityInput({
@@ -79,7 +81,8 @@ function CityInput({
   onStartEditingCity,
   onStopEditingCity,
   onSearchCities,
-  onSelectCity
+  onSelectCity,
+  onAddUserCity
 }: CityInputProps) {
   const labelRef = useRef(null)
   const labelMeasurement = useMeasure(labelRef)
@@ -103,9 +106,12 @@ function CityInput({
             autoFocus
             onBlur={() => onStopEditingCity()}
             onInput={event => onSearchCities(event.currentTarget.value)}
-            onKeyPress={event =>
-              searchCity && event.key === 'Enter' && onSelectCity(searchCity)
-            }
+            onKeyPress={event => {
+              if (searchCity && event.key === 'Enter') {
+                onSelectCity(searchCity)
+                onAddUserCity(selected)
+              }
+            }}
             placeholder='Digite o nome da cidade'
           />
           {completeLabel && (
@@ -134,7 +140,8 @@ const mapDispatchToProps = (dispatch: any) => ({
   onStartEditingCity: () => dispatch(startEditingCity()),
   onStopEditingCity: () => dispatch(stopEditingCity()),
   onSelectCity: (city: City) => dispatch(selectCity(city)),
-  onSearchCities: (term: string) => dispatch(searchCities(term))
+  onSearchCities: (term: string) => dispatch(searchCities(term)),
+  onAddUserCity: (city: City) => dispatch(addUserCity(city))
 })
 
 export default connect(
