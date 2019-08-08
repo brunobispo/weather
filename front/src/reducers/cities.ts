@@ -29,7 +29,6 @@ export default function cities(
   state: CitiesState = initialState,
   action: CitiesAction | UserAction
 ): CitiesState {
-  console.log(action)
   switch (action.type) {
     case CitiesActionTypes.REQUEST_SEARCH_CITY:
       return { ...state, searchTerm: action.term }
